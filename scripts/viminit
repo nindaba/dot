@@ -16,3 +16,6 @@ curl -fLo "${PLUG_VIM}" --create-dirs \
 
 echo "vim-plug installed successfully."
 echo "You can now run :PlugInstall inside Vim."
+
+
+alas xopy=/mnt/c/Windows/System32/clip.exe
