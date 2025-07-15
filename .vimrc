@@ -17,9 +17,9 @@ nnoremap <leader>e :Explore<CR>
 " call plug#begin('~/.vim/plugged')
 " Plug 'nyoom-engineering/oxocarbon.nvim'
 " call plug#end()
-source https://www.vim.org/scripts/download_script.php?src_id=14080 " Carbon theme
+"Exception source https://www.vim.org/scripts/download_script.php?src_id=14080 " Carbon theme
 
-colorscheme oxocarbon
+" colorscheme oxocarbon
 
 set clipboard=unnamedplus
 
