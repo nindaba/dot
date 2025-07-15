@@ -19,3 +19,5 @@ Plug 'nyoom-engineering/oxocarbon.nvim'
 call plug#end()
 
 colorscheme oxocarbon
+
+set clipboard=unnamedplus
