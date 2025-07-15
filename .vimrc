@@ -21,3 +21,7 @@ call plug#end()
 colorscheme oxocarbon
 
 set clipboard=unnamedplus
+
+" Change cursor shape based on mode
+let &t_SI = "\e[6 q"   " Insert mode: steady vertical bar
+let &t_EI = "\e[2 q"   " Normal mode: steady block
