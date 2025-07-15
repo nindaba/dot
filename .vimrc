@@ -11,12 +11,13 @@ set expandtab
 let mapleader=" "
 
 " Map <leader>e to toggle the built-in netrw file tree
-nnoremap <leader>e :Lexplore<CR>
+nnoremap <leader>e :Explore<CR>
 
 " Install and use Oxocarbon colorscheme via vim-plug
-call plug#begin('~/.vim/plugged')
-Plug 'nyoom-engineering/oxocarbon.nvim'
-call plug#end()
+" call plug#begin('~/.vim/plugged')
+" Plug 'nyoom-engineering/oxocarbon.nvim'
+" call plug#end()
+source https://www.vim.org/scripts/download_script.php?src_id=14080 " Carbon theme
 
 colorscheme oxocarbon
 
