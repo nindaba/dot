@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# This script installs vim-plug for Vim (not Neovim).
+# It will download plug.vim to the autoload directory.
+
+set -e
+
+VIM_AUTOLOAD_DIR="${HOME}/.vim/autoload"
+PLUG_VIM="${VIM_AUTOLOAD_DIR}/plug.vim"
+
+mkdir -p "${VIM_AUTOLOAD_DIR}"
+
+echo "Downloading vim-plug to ${PLUG_VIM}..."
+curl -fLo "${PLUG_VIM}" --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+echo "vim-plug installed successfully."
+echo "You can now run :PlugInstall inside Vim."
