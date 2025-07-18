@@ -26,3 +26,9 @@ set clipboard=unnamedplus
 " Change cursor shape based on mode
 let &t_SI = "\e[6 q"   " Insert mode: steady vertical bar
 let &t_EI = "\e[2 q"   " Normal mode: steady block
+
+" Highlight yanked text for 200ms
+augroup YankHighlight
+  autocmd!
+  autocmd TextYankPost * silent! lua vim.highlight.on_yank {timeout = 200}
+augroup END
