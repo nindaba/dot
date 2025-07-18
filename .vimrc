@@ -8,10 +8,9 @@ set shiftwidth=2
 set expandtab
 
 " Remove the spliting lines
-set fillchars=vert:\ 
-set fillchars=horiz:\ 
-set fillchars=fold:\ 
-set fillchars=eob:\ 
+set fillchars+=vert:\ 
+highlight VertSplit cterm=NONE
+
 
 " Set leader key to space
 let mapleader=" "
@@ -25,10 +24,9 @@ nnoremap <Leader>< :vertical resize -5<CR>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <C-l> <C-w>l::
 
 
-highlight VertSplit ctermfg=NONE ctermbg=NONE guifg=bg guibg=bg
 
 
 
