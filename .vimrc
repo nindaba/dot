@@ -16,6 +16,10 @@ nnoremap <Leader>+ :resize +5<CR>
 nnoremap <Leader>- :resize -5<CR>
 nnoremap <Leader>> :vertical resize +5<CR>
 nnoremap <Leader>< :vertical resize -5<CR>
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 
 " Install and use Oxocarbon colorscheme via vim-plug
