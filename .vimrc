@@ -8,7 +8,10 @@ set shiftwidth=2
 set expandtab
 
 " Remove the spliting lines
-set fillchars=vert:\ ,horiz:\ ,fold:\ ,eob:\ 
+set fillchars=vert:\
+set fillchars=horiz:\ 
+set fillchars=fold:\ 
+set fillchars=eob:\ 
 
 " Set leader key to space
 let mapleader=" "
@@ -23,6 +26,11 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+
+highlight VertSplit ctermfg=NONE ctermbg=NONE guifg=bg guibg=bg
+
+
 
 
 " Install and use Oxocarbon colorscheme via vim-plug
