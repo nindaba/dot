@@ -17,10 +17,10 @@ let mapleader=" "
 
 " Map <leader>e to toggle the built-in netrw file tree
 nnoremap <leader>e :Explore<CR>
-nnoremap <Leader>+ :resize +5<CR>
-nnoremap <Leader>- :resize -5<CR>
-nnoremap <Leader>> :vertical resize +5<CR>
-nnoremap <Leader>< :vertical resize -5<CR>
+nnoremap <Leader>+ :resize +15<CR>
+nnoremap <Leader>- :resize -15<CR>
+nnoremap <Leader>> :vertical resize +15<CR>
+nnoremap <Leader>< :vertical resize -15<CR>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
