@@ -12,6 +12,11 @@ let mapleader=" "
 
 " Map <leader>e to toggle the built-in netrw file tree
 nnoremap <leader>e :Explore<CR>
+nnoremap <Leader>+ :resize +5<CR>
+nnoremap <Leader>- :resize -5<CR>
+nnoremap <Leader>> :vertical resize +5<CR>
+nnoremap <Leader>< :vertical resize -5<CR>
+
 
 " Install and use Oxocarbon colorscheme via vim-plug
 " call plug#begin('~/.vim/plugged')
