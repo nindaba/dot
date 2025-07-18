@@ -8,7 +8,7 @@ set shiftwidth=2
 set expandtab
 
 " Remove the spliting lines
-set fillchars=vert:\
+set fillchars=vert:\ 
 set fillchars=horiz:\ 
 set fillchars=fold:\ 
 set fillchars=eob:\ 
