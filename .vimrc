@@ -7,6 +7,9 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
+" Remove the spliting lines
+set fillchars=vert:\ ,horiz:\ ,fold:\ ,eob:\ 
+
 " Set leader key to space
 let mapleader=" "
 
