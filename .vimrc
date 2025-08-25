@@ -1,3 +1,12 @@
+" Set folds
+set foldmethod=syntax
+set foldlevel=99
+
+" Set directory for swap files
+set directory^=~/dev/vswp//
+
+" Set base path
+set path+=**/*
 " Enable relative line numbers
 set relativenumber
 set number
@@ -11,12 +20,14 @@ set expandtab
 set fillchars=vert:\ 
 highlight VertSplit cterm=NONE
 
-
+" Search Highlight
+set hlsearch
+highlight Search ctermfg=white
 " Set leader key to space
 let mapleader=" "
 
 " Map <leader>e to toggle the built-in netrw file tree
-nnoremap <leader>e :Explore<CR>
+nnoremap <leader>e :w<CR>:e .<CR>
 nnoremap <Leader>+ :resize +15<CR>
 nnoremap <Leader>- :resize -15<CR>
 nnoremap <Leader>> :vertical resize +15<CR>
@@ -24,12 +35,12 @@ nnoremap <Leader>< :vertical resize -15<CR>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l::
-
-
-
-
-
+nnoremap <C-l> <C-w>l
+nnoremap tt :wa \| terminal<CR>
+nnoremap S :wa<CR>
+nnoremap <leader>noh :noh<CR>
+"nnoremap kj <Esc>
+"nnoremap jk <Esc>
 
 " Install and use Oxocarbon colorscheme via vim-plug
 " call plug#begin('~/.vim/plugged')
@@ -39,7 +50,17 @@ nnoremap <C-l> <C-w>l::
 
 " colorscheme oxocarbon
 
-set clipboard=unnamedplus
+" Completion settings
+set complete=.,w,b,u,t,i
+set completeopt=menu,menuone,noselect,noinsert,preview
+
+" Key mappings for navigating the popup menu
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+
+set updatetime=250
+autocmd CursorHoldI * if col('.') > 2 && !pumvisible() | call feedkeys("\<C-n>", 'n') | endif
 
 " Change cursor shape based on mode
 let &t_SI = "\e[6 q"   " Insert mode: steady vertical bar
@@ -52,3 +73,10 @@ augroup YankHighlight
 augroup END
 
 let g:netrw_liststyle = 3
+
+
+" Warnings 
+set noerrorbells
+set novisualbell
+
+
