@@ -39,6 +39,10 @@ nnoremap <C-l> <C-w>l
 nnoremap tt :wa \| terminal<CR>
 nnoremap S :wa<CR>
 nnoremap <leader>noh :noh<CR>
+nnoremap cc :ccl<CR>
+nnoremap ck :cp<CR>
+nnoremap cj :cn<CR>
+
 "nnoremap kj <Esc>
 "nnoremap jk <Esc>
 
@@ -78,5 +82,60 @@ let g:netrw_liststyle = 3
 " Warnings 
 set noerrorbells
 set novisualbell
+
+
+" Find in files using grep
+command! -nargs=1 Find call s:GrepToQuickfix(<f-args>)
+nnoremap <Leader>f :Find<Space>
+
+function! s:GrepToQuickfix(term)
+  let l:cmd = 'grep -rn "' . a:term . '" . > /tmp/vim_grep_results.txt'
+  call system(l:cmd)
+  cgetfile /tmp/vim_grep_results.txt
+  copen
+endfunction
+
+
+" Navigation
+
+" Enable search highlighting and incremental search
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set number
+
+" Clear search highlight with double <Esc>
+nnoremap <Esc><Esc> :nohlsearch<CR>
+
+" Use 's' to start a word search (case-insensitive)
+nnoremap <leader>s /<C-r>=input("Search word: ")<CR><CR>
+
+" Optional: Highlight matches manually with <Leader>h
+function! HighlightMatches()
+  let @/ = input("Highlight word: ")
+  set hlsearch
+endfunction
+nnoremap <Leader>h :call HighlightMatches()<CR>
+
+
+" Find files by name using 'find' and show results in quickfix
+command! -nargs=1 FindFile call s:FindFilesByName(<f-args>)
+nnoremap <Leader>f :FindFile<Space>
+
+function! s:FindFilesByName(term)
+  " Use find to locate files with the term in their name (case-insensitive)
+  
+  
+  let l:cmd = 'find . -type f -iname "*' . a:term . '*" | sed "s/$/:1: /" > /tmp/vim_find_results.txt'
+  
+  call system(l:cmd)
+
+  " Load results into quickfix list
+  cgetfile /tmp/vim_find_results.txt
+  copen
+endfunction
+
+
 
 
