@@ -1,3 +1,8 @@
+"Timeouts
+set timeoutlen=300     " Time in milliseconds to wait for a mapped sequence
+set ttimeoutlen=10     " Time to wait for key codes (like arrow keys)
+
+
 " Set folds
 set foldmethod=syntax
 set foldlevel=99
@@ -43,8 +48,12 @@ nnoremap cc :ccl<CR>
 nnoremap ck :cp<CR>
 nnoremap cj :cn<CR>
 
-"nnoremap kj <Esc>
-"nnoremap jk <Esc>
+inoremap jk <Esc>
+inoremap kj <Esc>
+
+"Identation 
+vnoremap < <gv
+vnoremap > >gv
 
 " Install and use Oxocarbon colorscheme via vim-plug
 " call plug#begin('~/.vim/plugged')
@@ -58,14 +67,39 @@ nnoremap cj :cn<CR>
 set complete=.,w,b,u,t,i
 set completeopt=menu,menuone,noselect,noinsert,preview
 
-" Key mappings for navigating the popup menu
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
-set updatetime=250
-autocmd CursorHoldI * if col('.') > 2 && !pumvisible() | call feedkeys("\<C-n>", 'n') | endif
+" Completion behavior
+set completeopt=menuone,noinsert,noselect
+set shortmess+=c
 
+" Use syntax-based completion if no omnifunc is set
+if &omnifunc == ""
+  set omnifunc=syntaxcomplete#Complete
+endif
+
+" Automatically trigger completion after typing 3 characters
+autocmd InsertCharPre * call AutoCompleteTrigger()
+
+function! AutoCompleteTrigger()
+  if len(&omnifunc) != 0 &&
+        \ v:char =~ '\w' &&
+        \ col('.') > 3 &&
+        \ getline('.')[col('.') - 4] =~ '\w' &&
+        \ getline('.')[col('.') - 3] =~ '\w' &&
+        \ getline('.')[col('.') - 2] =~ '\w'
+    call feedkeys("\<C-x>\<C-o>", 'n')
+  endif
+endfunction
+
+" Navigation keys: scroll and insert immediately
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>\<C-y>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>\<C-y>" : "\<C-k>"
+
+" Disable Enter confirmation
+inoremap <expr> <CR> pumvisible() ? "\<CR>" : "\<CR>"
+
+" Optional: Tab behaves normally unless menu is visible
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>\<C-y>" : "\<Tab>"
 " Change cursor shape based on mode
 let &t_SI = "\e[6 q"   " Insert mode: steady vertical bar
 let &t_EI = "\e[2 q"   " Normal mode: steady block
@@ -121,7 +155,7 @@ nnoremap <Leader>h :call HighlightMatches()<CR>
 
 " Find files by name using 'find' and show results in quickfix
 command! -nargs=1 FindFile call s:FindFilesByName(<f-args>)
-nnoremap <Leader>f :FindFile<Space>
+nnoremap <Leader><Leader> :FindFile<Space>
 
 function! s:FindFilesByName(term)
   " Use find to locate files with the term in their name (case-insensitive)
@@ -138,4 +172,30 @@ endfunction
 
 
 
+
+" Function to commit and push
+function! GitCommitPush()
+  let msg = input('Commit message: ')
+  if msg != ''
+    execute 'wa | !git add . && git commit -m "' . msg . '" && git push -u origin ' . system('git rev-parse --abbrev-ref HEAD')
+  else
+    echo "Commit message cannot be empty."
+  endif
+endfunction
+
+" Function to only commit
+function! GitCommitOnly()
+  let msg = input('Commit message: ')
+  if msg != ''
+    execute 'wa | !git commit -am "' . msg . '"'
+  else
+    echo "Commit message cannot be empty."
+  endif
+endfunction
+
+" Map to <leader>gp for commit + push
+nnoremap <leader>gp :call GitCommitPush()<CR>
+
+" Map to <leader>gc for commit only
+nnoremap <leader>gc :call GitCommitOnly()<CR>
 
