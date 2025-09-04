@@ -1,4 +1,5 @@
 "Timeouts
+"
 set timeoutlen=300     " Time in milliseconds to wait for a mapped sequence
 set ttimeoutlen=10     " Time to wait for key codes (like arrow keys)
 
@@ -65,41 +66,26 @@ vnoremap > >gv
 
 " Completion settings
 set complete=.,w,b,u,t,i
-set completeopt=menu,menuone,noselect,noinsert,preview
+set completeopt=menu,menuone,noinsert,noselect,preview
 
+" Key mappings for navigating the popup menu
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+" inoremap <expr> <CR> pumvisible() ? \"\<C-y>" : \"\<CR>"
 
-" Completion behavior
-set completeopt=menuone,noinsert,noselect
-set shortmess+=c
-
-" Use syntax-based completion if no omnifunc is set
-if &omnifunc == ""
-  set omnifunc=syntaxcomplete#Complete
-endif
-
-" Automatically trigger completion after typing 3 characters
-autocmd InsertCharPre * call AutoCompleteTrigger()
-
-function! AutoCompleteTrigger()
-  if len(&omnifunc) != 0 &&
-        \ v:char =~ '\w' &&
-        \ col('.') > 3 &&
-        \ getline('.')[col('.') - 4] =~ '\w' &&
-        \ getline('.')[col('.') - 3] =~ '\w' &&
-        \ getline('.')[col('.') - 2] =~ '\w'
-    call feedkeys("\<C-x>\<C-o>", 'n')
-  endif
-endfunction
-
+set updatetime=400
+autocmd CursorHoldI * if col('.') > 2 && !pumvisible() | call feedkeys("\<C-n>") | endif
 " Navigation keys: scroll and insert immediately
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>\<C-y>" : "\<C-j>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>\<C-y>" : "\<C-k>"
+" inoremap <expr> <C-j> pumvisible() ? "\<C-n>\<C-y>" : "\<C-j>"
+" inoremap <expr> <C-k> pumvisible() ? "\<C-p>\<C-y>" : "\<C-k>"
 
-" Disable Enter confirmation
-inoremap <expr> <CR> pumvisible() ? "\<CR>" : "\<CR>"
 
 " Optional: Tab behaves normally unless menu is visible
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>\<C-y>" : "\<Tab>"
+
+inoremap <CR> <C-g>u<CR>
+inoremap <Tab> <C-g>u<Tab> 
+       
 " Change cursor shape based on mode
 let &t_SI = "\e[6 q"   " Insert mode: steady vertical bar
 let &t_EI = "\e[2 q"   " Normal mode: steady block
